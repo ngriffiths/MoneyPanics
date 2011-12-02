@@ -1,0 +1,36 @@
+country,ISO code,"2010 Deficit (% of GDP)","10 yr bond yields (Oct11) (lower = better)","Q2 2011 Gov debt (% of GDP)",Latest unemployment,Latest unemployment (15-24)
+EU (27 countries),,-6.6,4.08,80.9,9.7,21.4
+EU (25 countries),,-6.6
+Euro area (17 countries),,-6.2,,87.3,10.2,21.2
+Euro area (16 countries),,-6.3,,87.4,10.2,21.2
+Belgium,BE,-4.1,4.2,98.4,6.7,17.4
+Bulgaria,BG,-3.1,5.26,15.2,11.9,26.8
+Czech Republic,CZ,-4.8,3.14,40.1,6.6,18.8
+Denmark,DK,-2.6,2.23,47.5,7.1,13.9
+Germany,DE,-4.3,2,81.1,5.8,9.2
+Estonia,EE,0.2,,6.2,12.8,21.8
+Ireland,IE,-31.3,8.1,104.6,14.2,29.5
+Greece,GR,-10.6,18.04,151.9,17.6,43.4
+Spain,ES,-9.3,5.26,65.2,22.6,48
+France,FR,-7.1,2.99,86.1,9.9,24
+Italy,IT,-4.6,5.97,121.4,8.3,29.3
+Cyprus,CY,-5.3,7,66.8,7.8,22.6
+Latvia,LV,-8.3,5.62,45.2,16.1,29.7
+Lithuania,LT,-7,5.05,37.9,15.5,32.7
+Luxembourg,LU,-1.1,2.37,18.7,4.8,14.7
+Hungary,HU,-4.2,7.88,76.8,9.9,23.1
+Malta,MT,-3.6,4.26,71.6,6.6,15.3
+Netherlands,NL,-5.1,2.46,63.8,4.5,8
+Austria,AT,-4.4,2.92,72.5,3.9,7.1
+Poland,PL,-7.8,5.71,56,9.4,23.8
+Portugal,PT,-9.8,11.72,106.3,12.5,27.1
+Romania,RO,-6.9,7.48,34.3,7.5,22.8
+Slovenia,SI,-5.8,5.16,44.4,8,13.4
+Slovakia,SK,-7.7,4.33,42.5,13.5,30.7
+Finland,FI,-2.5,2.51,45.3,7.8,20.4
+Sweden,SE,0.2,1.9,36.8,7.2,22.1
+United Kingdom,GB,-10.3,2.52,80.1,8.1,21.2
+Iceland,IS,-10.1
+Norway,NO,10.6,,42.3,3.2,8.2
+
+DATA SOURCE: ,http://epp.eurostat.ec.europa.eu/portal/page/portal/euroindicators/peeis/

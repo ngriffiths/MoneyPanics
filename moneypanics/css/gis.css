@@ -1,0 +1,17 @@
+svg {
+  background: #eee;
+  width: 960px;
+  height: 500px;
+}
+
+#counties path {
+  stroke: #fff;
+  stroke-width: .25px;
+}
+
+#provinces path {
+  fill: none;
+  stroke: #fff;
+  opacity: 0.5;
+  stroke-width: 1.5px;
+}
