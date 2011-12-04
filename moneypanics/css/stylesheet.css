@@ -20,7 +20,7 @@ html, body {
 	position: absolute;
 	top: 1%;
 	left: 1%;
-	width: 555px;
+	width: 520px;
 	height: 45px;
 	background: #eee;
 	opacity: .9;
@@ -28,7 +28,6 @@ html, body {
 	border-radius: 10px;
 	box-shadow: 2px 4px 3px #333;
 	z-index:100;
-	cursor: pointer;
 }
 #title h2 {
 	margin-top: 7px;
@@ -86,28 +85,58 @@ html, body {
 	left: 1%;
 	width: 500px;
 	height: 540px;
-	border: 2px solid #999;
-	border-radius: 10px;
+	background: rgb(0,0,0)	/* For browers w/o rgba support (boo...)*/
+	background: rgba(0,0,0,0);	/* Transparent background */
 }
 /* CHART DRAWERS */
-h2.acc_trigger {
-	margin: 5px 0 2px 0;
+h2.drawer_header {
+	margin: 0 15px 2px 15px;
+	font-family: Verdana, Arial, sans-serif;
 	font-weight: normal;
+	text-shadow: 1px 2px 2px #000;
+	border-bottom-color: #EEE;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	
+
 }
-h2.acc_trigger a {
-	color: #FFF;
+h2.drawer_header:hover {
+	text-decoration: none;
+	/*border-color: #CCC;*/
+}
+h2.drawer_header a {
+	color: #EEE;
 	text-decoration: none;
 	display: block;
-	padding: 0 0 0 15px;
+	padding: 0 0 0 0px;
 }
-h2.acc_trigger a:hover {
+h2.drawer_header a:hover {
 	color: #CCC;
 }
-h2.active {
+/*h2.active {
+	position: relative;
+	top: 1px;
 	background-position: left bottom;
+}*/
+.arrow-down {
+	position: relative;
+	float: right;
+	margin: -2px 15px 2px 15px;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #EEE;
 }
-.acc_container {
+.drawer_container {
 	overflow: hidden;
+	position: relative;
+	padding: 0px 10px 0px 10px;
+}
+/* CUT THIS? */
+.block {
+	background-color: #666;
+	opacity: 1;
 }
 /* MAP LEGEND */
 #legend {
@@ -145,8 +174,18 @@ span {
 	width: 200px;
 	height: 20px;
 	margin-left: 15px;
-	background: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.0,#feedde), color-stop(0.5, #e6550d), color-stop(1.0,#a63603));;
-	background: -moz-linear-gradient(left, #feedde, #e6550d, #a63603);
+	background: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.0,#F9E5D9), color-stop(0.5, #EF3B2C), color-stop(1.0,#99000D));;
+	background: -moz-linear-gradient(left, #F9E5D9, #EF3B2C, #99000D);
+}
+/* INFO */
+#info {
+	position: absolute;
+	top: 15%;
+	right: 2%;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #999;
+	border-color:red;
 }
 /* TOOLTIP */
 #tooltip { 

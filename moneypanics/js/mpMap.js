@@ -1,9 +1,11 @@
+var $j=jQuery.noConflict();
+$j(document).ready(function() {
 // Calculate noniles for CSS 
 var quantile = pv.Scale.quantile()
 	.quantiles(7)
-	.domain(pv.values(def2010))
-	.range(6,0);
-
+	.domain(pv.values(debt2011))
+	.range(0,6);
+/*
 function clearTitle() {
 	// Save element for later reference
 	var elem = $(this);
@@ -18,7 +20,7 @@ function clearTitle() {
 		elem.attr({title:savetitle});
 	});
 }
-
+*/
 function load_countries(e) {
 	//var eng_link = "http://en.rsf.org/";
 	var count = e.features.length;
@@ -27,7 +29,7 @@ function load_countries(e) {
 		var feature = e.features[i];
 		// get the country name & data
 		var country = feature.data.properties.NAME,
-			deficit = def2010[country];
+			cdata = debt2011[country];
 		
 		//console.log(country+": "+debt);
 		//var deficit = countryData[1];
@@ -37,27 +39,24 @@ function load_countries(e) {
 		
 		
     	// Assign mouse properties to the element
-    	$(feature.element).attr("title", country);
-    	$(feature.element).attr("id", deficit);	
+    	$j(feature.element).attr("title", country);
+    	$j(feature.element).attr("id", cdata);	
 		
-		$(feature.element).hover(function() {
-			var country = $(this).attr('title');
-			var deficit = $(this).attr('id');
-			// create rsf-friendly link name from the country name
-			//var linkname = country.toLowerCase().replace(/\s/g, "-");
-			//var url = eng_link+linkname+".html"
+		$j(feature.element).hover(function() {
+			var country = $j(this).attr('title');
+			var cdata = $j(this).attr('id');
 			
 			// Remove the title element so the firefox tooltip doesnt appear
 			//$(this).removeAttr("title");
 			
 			// bring up the tooltip
-			showTooltip(country,deficit);
+			showTooltip(country,cdata);
 			// Open the country page at RSF on click
-			if (deficit != undefined) {
-			$(this).dblclick(function() {
+			if (cdata != undefined) {
+			$j(this).dblclick(function() {
 				window.open(url);
 				// Prevent multiple windows from opening on occasion
-				$(this).preventDefault();
+				$j(this).preventDefault();
 			});
 			} else {
 				//dev/null
@@ -65,38 +64,37 @@ function load_countries(e) {
 			}
 		}, function() {
 			// INSERT CODE TO REASSIGN COUNTRY NAME TO TITLE ELEMENT
-			//console.log(country);
 			hideTooltip();
 		}).mousemove(tooltipFollow);
     	
     	
 		// Assign colorbrewer code
-		if (deficit == undefined) {
-			$(feature.element).attr("class", "no-quantile");
+		if (cdata == undefined) {
+			$j(feature.element).attr("class", "no-quantile");
 		} else {
-			$(feature.element).attr("class", "q" + quantile(deficit) + "-" + 7);
+			$j(feature.element).attr("class", "q" + quantile(cdata) + "-" + 7);
 		}
    	}
 }
 
 // Tooltip content & display
-function showTooltip(c,deficit) {
+function showTooltip(c,cdata) {
 	var debt = debt2011[c],
+		deficit = def2010[c],
 		bonds = bondYields[c],
 		jobs = unemployment[c],
 		jobs1524 = unemployment1524[c];
-	if (deficit == undefined) {
-		$("#tooltip").html("<h3>"+ c +"</h3><p>Non-Member Country</p>");
+	if (debt == undefined) {
+		$j("#tooltip").html("<h3>"+ c +"</h3><p>Non-Member Country</p>");
 	} else {
-		$("#tooltip").html("<h3>"+ c +"</h3><p><b>Unemployment: </b>"+jobs+"%<br /><b>Youth Unemployment(15-24): </b>"+jobs1524+"%<br /><b>Government Deficit(% of GDP): </b>"+deficit+"%</p>");
-		//$("#tooltip").html("<h3>"+ c +"</h3><p><b>Rank:</b> "+ r +" of 178<br />Double-click for more info.<p>");
+	  $j("#tooltip").html("<h3>"+ c +"</h3><p><b>Unemployment: </b>"+jobs+"%<br /><b>Government Debt (% of GDP): </b>"+debt+"%<br /><b>Government Deficit (% of GDP): </b>"+deficit+"%</p>");
 	}
-	$("#tooltip").stop().show();
+	$j("#tooltip").stop().show();
 }
 
 // Makes the tooltip follow the cursor
 function tooltipFollow(e) {
-	$("#tooltip").css({
+	$j("#tooltip").css({
     	top: (e.pageY) + "px",
     	left: (e.pageX + 15) + "px",
     });
@@ -104,7 +102,7 @@ function tooltipFollow(e) {
 
 // Hide the tooltip
 function hideTooltip() {
-	$("#tooltip").stop().hide();
+	$j("#tooltip").stop().hide();
 }
 
 // Create the polymaps instance & the map surface	
@@ -113,9 +111,9 @@ var map = po.map()
 // add an svg element to the 'map' div, with settings 
 	.container(document.getElementById("map").appendChild(po.svg("svg")))
 	// set initial map positioning & zoom
-	.center({lat:52,lon:-4})
-	.zoom(4.25)
-	.zoomRange([3.75,4.25])
+	.center({lat:50,lon:-5})
+	.zoom(4.5)
+	.zoomRange([4,5.5])
 	// include the interative features (key ctrl, mouse wheel, etc)
     //.add(po.wheel())
     .add(po.drag())
@@ -123,7 +121,7 @@ var map = po.map()
     		
 // draw the map from json data
 map.add(po.geoJson()
-    .url("http://127.0.0.1/Projects/MoneyPanics/moneypanics/data/EuroBorders.geojson")
+    .url("http://127.0.0.1/Projects/MoneyPanics/moneypanics/data/EuroRegion_sm1.geojson")
     // excute the 'load' function(below) once loaded
     .on("load", load_countries)
  	.id("worldmap")
@@ -137,14 +135,92 @@ map.add(po.compass()
 );    	
 
 // Assign CSS stylings to map (see colorbrewer2.org)
-map.container().setAttribute("class", "Oranges");
+map.container().setAttribute("class", "Reds");
 
-// Show/hide the title on click
-$("#title").click(function() {
-	$("#title").slideUp();
-	$("#titleSmall").fadeIn(800);
-});
-$("#titleSmall").click(function() {
-	$("#titleSmall").slideUp();
-	$("#title").fadeIn(800);
+/* CHARTS */
+	/* GOVT DEBT CHART */
+	//Get the deficit data
+	var debtdata = [],
+		country = [];
+	$j.each(debt2011, function(ctry,val) {
+		//console.log(ctry+": "+val);
+		country.push(ctry);
+		debtdata.push(val);
+	});
+	// Create the bar graph
+	var debtChart = new Grafico.HorizontalBarGraph($('govtDebt'), debtdata,
+		{
+			labels:country,
+			datalabels:{one:debtdata},
+			height:450, //This needs to be explicity set
+			background_color:"#666", //Set to background color of div container if setting opacity
+			color:"#FCBBA1",
+			hover_color:"#99000D",
+			bargraph_lastcolor:"#99000D",
+			vertical_label_unit:"%",
+			show_ticks:false,
+			grid:false
+		});
+	
+	/* GOVT DEFICIT CHART */
+	//Get the deficit data
+	var defdata = [],
+		country = [];
+	$j.each(def2010, function(ctry,val) {
+		country.push(ctry);
+		defdata.push(val);
+	});
+	// Create the bar graph
+	var defChart = new Grafico.HorizontalBarGraph($('govtDef'), defdata,
+		{
+			labels:country,
+			datalabels:{one:defdata},
+			height:450, //This needs to be explicity set
+			background_color:"#666", //Set to background color of div container if setting opacity
+			color:"#FCBBA1", //#4b80b6",
+			hover_color:"#99000D",
+			bargraph_lastcolor:"#99000D",
+		    //bargraph_negativecolor:"red",
+			vertical_label_unit:"%",
+			show_ticks:false,
+			grid:false
+		});
+	
+	/* Unemployment CHART */
+	//Get the deficit data
+	var jdata = [],
+		jcountry = [];
+	$j.each(unemployment, function(ctry,val) {
+		country.push(ctry);
+		jdata.push(val);
+	});
+	// Create the bar graph
+	var jobChart = new Grafico.HorizontalBarGraph($('unemployment'), jdata,
+		{
+			labels:country,
+			datalabels:{one:jdata},
+			height:450, //This needs to be explicity set
+			background_color:"#666", //Set to background color of div container
+			color:"#FCBBA1",
+			hover_color:"#99000D",
+			vertical_label_unit:"%",
+			bargraph_lastcolor:"#99000D",
+			show_ticks:false,
+			grid:false
+		});
+		
+	// Sliding Drawer Effect
+	// http://www.sohtanaka.com/web-design/simple-accordion-w-css-and-jquery/
+	$j(".drawer_container").hide(); //Close all containers
+	$j(".drawer_header:last").addClass("active").nextAll(".drawer_container:first").show(); //Display the last container
+	$j(".drawer_header").click(function() {
+		if( $j(this).is(".active") ) {
+			$j(this).removeClass("active").nextAll(".drawer_container:first").slideUp(550);
+		} else {
+			$j(".active").removeClass("active");
+			$j(".drawer_container").slideUp(550);
+			$j(this).addClass("active").nextAll(".drawer_container:first").slideDown(550);
+		}
+		return false; //Prevent browser from jumping to link anchor
+	});	
 });
