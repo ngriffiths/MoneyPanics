@@ -285,6 +285,9 @@ Grafico.BaseGraph = Class.create(Grafico.Base, {
     this.y_padding_top = this.options.padding_top;
     this.y_padding_bottom = 20 + this.paddingBottomOffset();
     this.y_padding = this.y_padding_top + this.y_padding_bottom;
+    
+    x_padding_left = 1000;
+    console.log(this.x_padding_left);
 
     this.graph_width = this.options.width - this.x_padding;
     this.graph_height = this.options.height - this.y_padding;

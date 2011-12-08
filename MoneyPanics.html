@@ -10,7 +10,6 @@
 <script src="moneypanics/js/grafico.bar.js" type="text/javascript"></script>
 
 <script src="moneypanics/data/countryData.js" type="text/javascript"></script>
-<!-- <script src="http://cdn.jquerytools.org/1.6.2/jquery.tools.min.js"></script> -->
 
 <link rel="stylesheet" href="moneypanics/css/stylesheet.css" type="text/css" media="screen">
 </head>
@@ -37,34 +36,13 @@
 <div id="tooltip" style="display:none;"></div>
 <div id="title" class="compas"><h2>In the Red: European Union Finances</h2></div>
 <div id="legend" class="compas">
-<span class="legend"><b>Government Debt (% of GDP)</b></span>
+<span class="legend"></span>
 <div id="gradient"></div>
 <span class="less"><b>Less</b></span><span class="more"><b>More</b></span>
 </div> <!-- end legend -->
-<div id="info"></div>
 </div> <!-- end map -->
 
-<script type="text/javascript" src="moneypanics/js/mpMap.js"></script>
-
-<!--<script type="text/javascript">
-	var $j = jQuery.noConflict();
-	$j(document).ready(function() {
-		//Sliding Drawer effect. See: http://www.sohtanaka.com/web-design/simple-accordion-w-css-and-jquery/
-		$j(".drawer_container").hide(); //Close all containers
-		$j(".drawer_header:last").addClass("active").nextAll(".drawer_container:first").show(); //Display the last container
-		$j(".drawer_header").click(function() {
-			if( $j(this).is(".active") ) {
-				$j(this).removeClass("active").nextAll(".drawer_container:first").slideUp(550);
-			} else {
-				$j(".active").removeClass("active");
-				$j(".drawer_container").slideUp(550);
-				$j(this).addClass("active").nextAll(".drawer_container:first").slideDown(550);
-			}
-			return false; //Prevent browser from jumping to link anchor
-		});
-		
-	});
-</script>-->
+<script type="text/javascript" src="moneypanics/js/moneypanics.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@ var def2010 = {
 "Norway":10.6,
 "Estonia":0.2,
 "Sweden":0.2,
-"Luxembourg":-1.1,
+"Luxembourg":"-1.1",
 "Finland":-2.5,
 "Denmark":-2.6,
 "Bulgaria":-3.1,

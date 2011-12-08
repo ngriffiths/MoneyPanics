@@ -141,7 +141,7 @@ h2.drawer_header a:hover {
 /* MAP LEGEND */
 #legend {
 	width: 225px;
-	height: 60px;
+	height: 55px;
 	position: absolute;
 	top: 87%;
 	right: 2%;
@@ -155,14 +155,14 @@ h2.drawer_header a:hover {
 	opacity: .9;
 }
 span {
-	margin-top: 3px;
+	margin-top: 0px;
 	margin-left: 5px;
 	margin-right: 3px;
 	color: #333;
 }
 .legend {
 	position: relative;
-	top: 3px;
+	top: 0px;
 	left: 13px;
 }
 .more {
@@ -170,22 +170,12 @@ span {
 }
 #gradient {
 	z-index: 50;
-	margin-top: 8px;
+	margin-top: 0px;
 	width: 200px;
 	height: 20px;
 	margin-left: 15px;
 	background: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(0.0,#F9E5D9), color-stop(0.5, #EF3B2C), color-stop(1.0,#99000D));;
 	background: -moz-linear-gradient(left, #F9E5D9, #EF3B2C, #99000D);
-}
-/* INFO */
-#info {
-	position: absolute;
-	top: 15%;
-	right: 2%;
-	width: 20px;
-	height: 20px;
-	border: 2px solid #999;
-	border-color:red;
 }
 /* TOOLTIP */
 #tooltip { 
