@@ -1,5 +1,5 @@
 var $j=jQuery.noConflict();
-//$j(document).ready(function() {
+$j(document).ready(function() {
 /*
 function clearTitle() {
 	// Save element for later reference
@@ -132,23 +132,20 @@ map.add(po.compass()
 // Assign CSS stylings to map (see colorbrewer2.org)
 map.container().setAttribute("class", "Reds");
 } // End drawMap
-drawMap();
 
-/* CHARTS */
-	/* GOVT DEBT CHART */
-	//Get the deficit data
-	var debtdata = [],
+/* Charts Function */
+function drawcharts(div,indicator) {
+	var data = [];
 		country = [];
-	$j.each(debt2011, function(ctry,val) {
-		//console.log(ctry+": "+val);
+	$j.each(indicator, function(ctry,val) {
 		country.push(ctry);
-		debtdata.push(val);
+		data.push(val);
 	});
-	// Create the bar graph
-	var debtChart = new Grafico.HorizontalBarGraph($('govtDebt'), debtdata,
+	//Create the bar chart
+	var chart = new Grafico.HorizontalBarGraph($(div), data,
 		{
 			labels:country,
-			datalabels:{one:debtdata},
+			datalabels:{one:data},
 			height:450, //This needs to be explicity set
 			background_color:"#666", //Set to background color of div container if setting opacity
 			color:"#FCBBA1",
@@ -158,65 +155,25 @@ drawMap();
 			show_ticks:false,
 			grid:false
 		});
-	
-	/* GOVT DEFICIT CHART */
-	//Get the deficit data
-	var defdata = [],
-		country = [];
-	$j.each(def2010, function(ctry,val) {
-		country.push(ctry);
-		defdata.push(val);
-	});
-	// Create the bar graph
-	var defChart = new Grafico.HorizontalBarGraph($('govtDef'), defdata,
-		{
-			labels:country,
-			datalabels:{one:defdata},
-			height:450, //This needs to be explicity set
-			background_color:"#666", //Set to background color of div container if setting opacity
-			color:"#FCBBA1", //#4b80b6",
-			hover_color:"#99000D",
-			bargraph_lastcolor:"#99000D",
-		    //bargraph_negativecolor:"red",
-			vertical_label_unit:"%",
-			show_ticks:false,
-			grid:false
-		});
-	
-	/* Unemployment CHART */
-	//Get the deficit data
-	var jobdata = [],
-		jcountry = [];
-	$j.each(unemployment, function(ctry,val) {
-		country.push(ctry);
-		jobdata.push(val);
-	});
-	// Create the bar graph
-	var jobChart = new Grafico.HorizontalBarGraph($('unemployment'), jobdata,
-		{
-			labels:country,
-			datalabels:{one:jobdata},
-			height:450, //This needs to be explicity set
-			background_color:"#666", //Set to background color of div container
-			color:"#FCBBA1",
-			hover_color:"#99000D",
-			vertical_label_unit:"%",
-			bargraph_lastcolor:"#99000D",
-			show_ticks:false,
-			grid:false
-		});
-		
-	// Sliding Drawer Effect
+} // END DRAWCHARTS FUNCTION
+
+	/* ASSIGN COUNTRY INDICATORS TO HTML DIVS FOR CHARTS */
+	var barcharts = {"unemployment":unemployment,"govtDef":def2010,"govtDebt":debt2011};
+
+	/* DRAW MAP & CHARTS */
+	drawMap();
+	for (var key in barcharts) {
+		drawcharts(key,barcharts[key]);
+	}
+
+	/* Sliding Drawer Effect */
 	// http://www.sohtanaka.com/web-design/simple-accordion-w-css-and-jquery/
 	$j(".drawer_container").hide(); //Close all containers
 	$j(".drawer_header:last").addClass("active").nextAll(".drawer_container:first").show(); //Display the last container
 	$j(".drawer_header").click(function() {
-		if( $j(this).is(".active") ) {
-			jQuery.noop();
-			//$j(this).removeClass("active").nextAll(".drawer_container:first").slideUp(550);
-		} else {
-			$j(".active").removeClass("active");
-			$j(".drawer_container").slideUp(550);
+		if( $j(this).not(".active") ) {
+			$j(".active").removeClass("active"); // Find the active header & remove the 'active' class`
+			$j(".drawer_container").slideUp(550); // Close the 'active' drawer
 			$j(this).addClass("active").nextAll(".drawer_container:first").slideDown(550);
 			$j(".Reds").fadeOut(800).hide(600, function() {
 				$j(this).remove();	
@@ -226,4 +183,4 @@ drawMap();
 		}
 		return false; //Prevent browser from jumping to link anchor
 	});	
-//});
+});
